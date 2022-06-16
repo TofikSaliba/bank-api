@@ -9,7 +9,7 @@ depRouter.use(
   })
 );
 
-depRouter.get("/deposite", function (req, res) {
+depRouter.put("/deposite", function (req, res) {
   res.json({
     procedure: "depositing",
     accountID: req.body.accountID,
