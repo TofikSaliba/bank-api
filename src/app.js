@@ -3,6 +3,13 @@ import express from "express";
 import cors from "cors";
 import path from "path";
 import { fileURLToPath } from "url";
+import addRouter from "./routes/addUser.js";
+import depRouter from "./routes/deposite.js";
+import updateCreditRouter from "./routes/updateCredit.js";
+import withdrawRouter from "./routes/withdraw.js";
+import transferRouter from "./routes/transfer.js";
+import getUserRouter from "./routes/getUser.js";
+import getAllUsersRouter from "./routes/getAllUsers.js";
 
 const app = express();
 
@@ -12,6 +19,15 @@ const app = express();
 
 app.use(express.json());
 app.use(cors());
+app.use(
+  addRouter,
+  depRouter,
+  updateCreditRouter,
+  withdrawRouter,
+  transferRouter,
+  getUserRouter,
+  getAllUsersRouter
+);
 
 app.get("/weather/:location", function (req, res) {
   axios
