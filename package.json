@@ -9,9 +9,8 @@
     "client": "npm start --prefix client",
     "start": "node src/app.js",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "install-client": "cd client && npm install && npm run build && cd ..",
     "install-server": "cd src && npm install && cd .. ",
-    "heroku-postbuild": "npm run install-client && npm run install-server"
+    "heroku-postbuild": "npm run install-server"
   },
   "dependencies": {
     "axios": "^0.27.2",
