@@ -1,18 +1,31 @@
-[
-  {
-    "owner": "2145522",
-    "accountID": "ud0e37i8l4ikj32j",
-    "cash": 2000,
-    "credit": 9999,
-    "usersAccess": ["2145522"],
-    "isActive": true
-  },
-  {
-    "owner": "2145522",
-    "accountID": "ud0e35a8l4ikk1j6",
-    "cash": 8000,
-    "credit": 1,
-    "usersAccess": ["2145522"],
-    "isActive": true
-  }
-]
+{
+  "ud0e39lcl4iti8439lcl4iti842": [
+    {
+      "owner": "775223553",
+      "accountID": "f84l4ivy3f3",
+      "cash": 4000,
+      "credit": 1000,
+      "usersAccess": ["775223553"],
+      "isActive": true
+    },
+    {
+      "owner": "775223553",
+      "accountID": "f4gl4ivyp8e",
+      "cash": 16000,
+      "credit": 9000,
+      "usersAccess": ["775223553"],
+      "isActive": true
+    },
+    {
+      "owner": "77522",
+      "accountID": "90sl4iw0fy5",
+      "cash": 38000,
+      "credit": 15000,
+      "usersAccess": ["77522"],
+      "isActive": true
+    }
+  ],
+  "ud0e3628l4iup0cc628l4iup0cb": [],
+  "ud0e3700l4iupkhg700l4iupkhf": [],
+  "ud0e37g8l4iupxdh7g8l4iupxdg": []
+}

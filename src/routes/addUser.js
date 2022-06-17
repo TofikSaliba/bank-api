@@ -1,6 +1,6 @@
 import express from "express";
 
-import { createUser } from "../users-exports.js";
+import { createUser, checkAPIKey, createAPIKey } from "../users-exports.js";
 
 const addRouter = express.Router();
 
@@ -13,8 +13,12 @@ addRouter.use(
 
 addRouter.post("/addUser", function (req, res) {
   try {
-    const newUser = createUser(req.body);
-    res.status(201).json(newUser);
+    if (!checkAPIKey(req.query.apiKey)) {
+      res.status(404).json({ code: 404, message: "Wrong API key, Not found!" });
+    } else {
+      const newUser = createUser(req.body, req.query.apiKey);
+      res.status(201).json(newUser);
+    }
   } catch (err) {
     res.status(400).json({ code: 400, message: err.message });
   }

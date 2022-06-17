@@ -1,5 +1,24 @@
 import fs from "fs";
 import chalk from "chalk";
+import uniqid from "uniqid";
+import { loadAccounts, saveAccounts } from "./accounts-exports.js";
+
+export const createAPIKey = () => {
+  const newKey = uniqid("", uniqid.process());
+  saveUsers([], newKey);
+  saveAccounts([], newKey);
+};
+
+export const checkAPIKey = (key) => {
+  if (!key) {
+    throw new Error("Must provide API key in query!");
+  }
+  const usersData = loadUsers();
+  if (usersData[key] === undefined) {
+    return false;
+  }
+  return true;
+};
 
 export const loadUsers = () => {
   try {
@@ -7,32 +26,34 @@ export const loadUsers = () => {
     const json = buffer.toString();
     return JSON.parse(json);
   } catch (err) {
-    return [];
+    return {};
   }
 };
 
-export const saveUsers = (users) => {
-  const dataJSON = JSON.stringify(users);
+export const saveUsers = (users, key) => {
+  const usersData = loadUsers();
+  usersData[key] = users;
+  const dataJSON = JSON.stringify(usersData);
   fs.writeFileSync("src/jasonData/users.json", dataJSON);
 };
 
-export const createUser = (body) => {
+export const createUser = (body, key) => {
   if (!body.name || !body.passportID) {
     throw new Error("must provide at least the name and passport ID!");
   }
-  const users = loadUsers();
+  const users = loadUsers()[key];
   const dublicate = users.find((user) => {
     return user.passportID === body.passportID;
   });
   if (!dublicate) {
-    return makeUserObj(body, users);
+    return makeUserObj(body, users, key);
   } else {
     console.log(chalk.red.inverse("User's passportID is already in use!"));
     throw new Error("User's passportID is already in use!");
   }
 };
 
-const makeUserObj = (body, users) => {
+const makeUserObj = (body, users, key) => {
   const newUserObj = {
     name: body.name,
     passportID: body.passportID,
@@ -41,16 +62,16 @@ const makeUserObj = (body, users) => {
     accounts: [],
   };
   users.push(newUserObj);
-  saveUsers(users);
+  saveUsers(users, key);
   console.log(chalk.green.inverse("user added successfully"));
   return newUserObj;
 };
 
-export const getUser = (id) => {
+export const getUser = (id, key) => {
   if (!id) {
     throw new Error("Must provide a passport ID!");
   }
-  const users = loadUsers();
+  const users = loadUsers()[key];
   const user = users.find((user) => {
     return user.passportID === id;
   });
@@ -63,8 +84,8 @@ export const getUser = (id) => {
   }
 };
 
-export const updateUsers = (account, cash = 0, credit = 0) => {
-  const users = loadUsers();
+export const updateUsers = (account, key, cash = 0, credit = 0) => {
+  const users = loadUsers()[key];
   account.usersAccess.forEach((userID) => {
     const userObj = users.find((user) => {
       return user.passportID === userID;
@@ -75,7 +96,7 @@ export const updateUsers = (account, cash = 0, credit = 0) => {
       userObj.accounts.push(account.accountID);
     }
   });
-  saveUsers(users);
+  saveUsers(users, key);
 };
 
 // export const deleteUser = (id) => {

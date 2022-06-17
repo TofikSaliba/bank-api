@@ -16,48 +16,50 @@ export const loadAccounts = () => {
     const json = buffer.toString();
     return JSON.parse(json);
   } catch (err) {
-    return [];
+    return {};
   }
 };
 
-export const saveAccounts = (accounts) => {
-  const dataJSON = JSON.stringify(accounts);
+export const saveAccounts = (accounts, key) => {
+  const accountsData = loadAccounts();
+  accountsData[key] = accounts;
+  const dataJSON = JSON.stringify(accountsData);
   fs.writeFileSync("src/jasonData/accounts.json", dataJSON);
 };
 
-export const createAccount = (body) => {
+export const createAccount = (body, key) => {
   if (!body.passportID) {
     throw new Error("must provide user owner passport ID!");
   }
   try {
-    getUser(body.passportID);
-    const accounts = loadAccounts();
-    const newAcc = makeAccountObj(body, accounts);
-    updateUsers(newAcc, newAcc.cash, newAcc.credit);
+    getUser(body.passportID, key);
+    const accounts = loadAccounts()[key];
+    const newAcc = makeAccountObj(body, accounts, key);
+    updateUsers(newAcc, key, newAcc.cash, newAcc.credit);
     return newAcc;
   } catch (err) {
     throw new Error(err.message + " Cannot create account");
   }
 };
 
-const makeAccountObj = (body, accounts) => {
+const makeAccountObj = (body, accounts, key) => {
   const newAccountObj = {
     owner: body.passportID,
-    accountID: uniqid(),
+    accountID: uniqid.process(),
     cash: body.cash || 0,
     credit: body.credit || 0,
     usersAccess: [body.passportID],
     isActive: true,
   };
   accounts.push(newAccountObj);
-  saveAccounts(accounts);
+  saveAccounts(accounts, key);
   console.log(chalk.green.inverse("Account created successfully"));
   return newAccountObj;
 };
 
-export const deposit = (body) => {
+export const deposit = (body, key) => {
   try {
-    const accounts = loadAccounts();
+    const accounts = loadAccounts()[key];
     const account = accounts.find((account) => {
       return account.accountID === body.accountID;
     });
@@ -65,8 +67,8 @@ export const deposit = (body) => {
       throw new Error("Account ID does not exist!");
     } else {
       account.cash += body.amount;
-      updateUsers(account, body.amount);
-      saveAccounts(accounts);
+      updateUsers(account, key, body.amount);
+      saveAccounts(accounts, key);
     }
   } catch (err) {
     throw new Error(err.message);
