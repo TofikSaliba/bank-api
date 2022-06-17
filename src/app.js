@@ -32,11 +32,6 @@ app.use(
 );
 
 app.get("/", function (req, res) {
-  try {
-    throw new Error("123");
-  } catch (err) {
-    console.log(err);
-  }
   res.send("<h1>Welcome to my bank API</h1>");
 });
 

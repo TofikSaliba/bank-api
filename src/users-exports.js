@@ -47,16 +47,20 @@ const makeUserObj = (body, users) => {
   return newUserObj;
 };
 
-export const readUser = (id) => {
+export const getUser = (id) => {
+  if (!id) {
+    throw new Error("Must provide a passport ID!");
+  }
   const users = loadUsers();
   const user = users.find((user) => {
-    return user.id === id;
+    return user.passportID === id;
   });
   if (user) {
-    const userPrint = chalk.inverse(user.id);
-    console.log(userPrint + "\n" + user.name + "\n" + user.email);
+    return user;
   } else {
-    console.log(chalk.red.inverse(`user ID: ${id} was not found`));
+    const msg = `User passport ID: ${id} was not found`;
+    console.log(chalk.red.inverse(msg));
+    throw new Error(msg);
   }
 };
 

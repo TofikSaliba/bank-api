@@ -1,5 +1,7 @@
 import express from "express";
 
+import { getUser } from "../users-exports.js";
+
 const getUserRouter = express.Router();
 
 getUserRouter.use(express.json());
@@ -10,10 +12,11 @@ getUserRouter.use(
 );
 
 getUserRouter.get("/getUser", function (req, res) {
-  res.json({
-    procedure: "getting a user",
-    passportID: req.body.passportID,
-  });
+  try {
+    res.json(getUser(req.body.passportID));
+  } catch (err) {
+    res.status(404).json({ code: 404, message: err.message });
+  }
 });
 
 export default getUserRouter;
