@@ -1,6 +1,6 @@
 import express from "express";
 
-import { deposit } from "../accounts-exports.js";
+import { depositOrUpdateCredit } from "../accounts-exports.js";
 import { checkAPIKey } from "../users-exports.js";
 
 const depRouter = express.Router();
@@ -24,7 +24,12 @@ depRouter.put("/deposit", function (req, res) {
       } else if (req.body.amount < 0) {
         throw new Error("Amount must be a positive number!");
       }
-      deposit(req.body, req.query.apiKey);
+      depositOrUpdateCredit(
+        req.body.accountID,
+        req.body.amount,
+        null,
+        req.query.apiKey
+      );
       res.json({
         message: "Success!",
         amount: req.body.amount,

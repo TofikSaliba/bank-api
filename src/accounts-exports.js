@@ -57,17 +57,46 @@ const makeAccountObj = (body, accounts, key) => {
   return newAccountObj;
 };
 
-export const deposit = (body, key) => {
+export const depositOrUpdateCredit = (accountID, amount, newCredit, key) => {
   try {
     const accounts = loadAccounts()[key];
     const account = accounts.find((account) => {
-      return account.accountID === body.accountID;
+      return account.accountID === accountID;
     });
     if (!account) {
-      throw new Error("Account ID does not exist!");
+      throw new Error(`Account ID: ${accountID} does not exist!`);
     } else {
-      account.cash += body.amount;
-      updateUsers(account, key, body.amount);
+      let creditDiff = 0;
+      account.cash += amount;
+      if (newCredit) {
+        creditDiff = newCredit - account.credit;
+        account.credit = newCredit;
+      }
+      updateUsers(account, key, amount, creditDiff);
+      saveAccounts(accounts, key);
+    }
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
+
+export const withdraw = (passportID, accountID, amount, key) => {
+  try {
+    const accounts = loadAccounts()[key];
+    const account = accounts.find((account) => {
+      return account.accountID === accountID;
+    });
+    if (!account) {
+      throw new Error(`Account ID: ${accountID} does not exist!`);
+    } else if (!account.usersAccess.includes(passportID)) {
+      throw new Error(
+        "Unauthorized withdrawal, User ID has no access to this account!"
+      );
+    } else if (account.credit + account.cash < amount) {
+      throw new Error("Insufficient funds! amount not available.");
+    } else {
+      account.cash += -amount;
+      updateUsers(account, key, -amount);
       saveAccounts(accounts, key);
     }
   } catch (err) {
