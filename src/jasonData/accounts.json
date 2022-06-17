@@ -1,0 +1,18 @@
+[
+  {
+    "owner": "2145522",
+    "accountID": "ud0e37i8l4ikj32j",
+    "cash": 2000,
+    "credit": 9999,
+    "usersAccess": ["2145522"],
+    "isActive": true
+  },
+  {
+    "owner": "2145522",
+    "accountID": "ud0e35a8l4ikk1j6",
+    "cash": 8000,
+    "credit": 1,
+    "usersAccess": ["2145522"],
+    "isActive": true
+  }
+]

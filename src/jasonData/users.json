@@ -2,14 +2,14 @@
   {
     "name": "tofik",
     "passportID": "2145522",
-    "cash": 1212214,
-    "credit": 0,
-    "accounts": []
+    "cash": 10000,
+    "credit": 10000,
+    "accounts": ["ud0e37i8l4ikj32j", "ud0e35a8l4ikk1j6"]
   },
   {
     "name": "rani",
     "passportID": "77522",
-    "cash": 14,
+    "cash": 0,
     "credit": 0,
     "accounts": []
   }

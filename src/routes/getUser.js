@@ -11,9 +11,9 @@ getUserRouter.use(
   })
 );
 
-getUserRouter.get("/getUser", function (req, res) {
+getUserRouter.get("/getUser/:id", function (req, res) {
   try {
-    res.json(getUser(req.body.passportID));
+    res.json(getUser(req.params.id));
   } catch (err) {
     res.status(404).json({ code: 404, message: err.message });
   }

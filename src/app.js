@@ -10,6 +10,7 @@ import withdrawRouter from "./routes/withdraw.js";
 import transferRouter from "./routes/transfer.js";
 import getUserRouter from "./routes/getUser.js";
 import getAllUsersRouter from "./routes/getAllUsers.js";
+import addAccountRouter from "./routes/addAccount.js";
 
 import { createUser } from "./users-exports.js";
 
@@ -28,7 +29,8 @@ app.use(
   withdrawRouter,
   transferRouter,
   getUserRouter,
-  getAllUsersRouter
+  getAllUsersRouter,
+  addAccountRouter
 );
 
 app.get("/", function (req, res) {
