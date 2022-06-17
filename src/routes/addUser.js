@@ -1,5 +1,7 @@
 import express from "express";
 
+import { createUser } from "../users-exports.js";
+
 const addRouter = express.Router();
 
 addRouter.use(express.json());
@@ -10,14 +12,12 @@ addRouter.use(
 );
 
 addRouter.post("/addUser", function (req, res) {
-  res.json({
-    procedure: "adding a user",
-    name: req.body.name,
-    passportID: req.body.passportID,
-    cash: req.body.cash || 0,
-    credit: req.body.credit || 0,
-    accounts: req.body.accounts || [],
-  });
+  try {
+    const newUser = createUser(req.body);
+    res.status(201).json(newUser);
+  } catch (err) {
+    res.status(400).json({ code: 400, message: err.message });
+  }
 });
 
 export default addRouter;

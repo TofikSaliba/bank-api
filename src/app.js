@@ -4,12 +4,14 @@ import cors from "cors";
 import path from "path";
 import { fileURLToPath } from "url";
 import addRouter from "./routes/addUser.js";
-import depRouter from "./routes/deposite.js";
+import depRouter from "./routes/deposit.js";
 import updateCreditRouter from "./routes/updateCredit.js";
 import withdrawRouter from "./routes/withdraw.js";
 import transferRouter from "./routes/transfer.js";
 import getUserRouter from "./routes/getUser.js";
 import getAllUsersRouter from "./routes/getAllUsers.js";
+
+import { createUser } from "./users-exports.js";
 
 const app = express();
 
@@ -30,6 +32,11 @@ app.use(
 );
 
 app.get("/", function (req, res) {
+  try {
+    throw new Error("123");
+  } catch (err) {
+    console.log(err);
+  }
   res.send("<h1>Welcome to my bank API</h1>");
 });
 
