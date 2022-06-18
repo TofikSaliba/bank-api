@@ -15,6 +15,7 @@ import resetKeyRouter from "./routes/resetKey.js";
 import addAcessToAccountRouter from "./routes/grantAccess.js";
 import removeAccessToAccountRouter from "./routes/removeAccess.js";
 import deleteAccountRouter from "./routes/deleteAccount.js";
+import deleteUserRouter from "./routes/deleteUser.js";
 
 const app = express();
 
@@ -38,7 +39,8 @@ app.use(
   resetKeyRouter,
   addAcessToAccountRouter,
   removeAccessToAccountRouter,
-  deleteAccountRouter
+  deleteAccountRouter,
+  deleteUserRouter
 );
 
 // if (process.env.NODE_ENV === "production") {}

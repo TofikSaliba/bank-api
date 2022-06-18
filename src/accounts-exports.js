@@ -213,6 +213,7 @@ export const deleteAccount = (passportID, accountID, key) => {
       });
       saveUsers(users, key);
       saveAccounts(newAccounts, key);
+      return account.cash;
     }
   } catch (err) {
     throw new Error(err.message);

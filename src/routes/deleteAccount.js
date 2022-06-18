@@ -22,9 +22,13 @@ deleteAccountRouter.delete("/api/deleteAccount", function (req, res) {
           "Missing params! must provide passportID and accountID to delete."
         );
       }
-      deleteAccount(req.body.passportID, req.body.accountID, req.query.apiKey);
+      const cash = deleteAccount(
+        req.body.passportID,
+        req.body.accountID,
+        req.query.apiKey
+      );
       res.json({
-        message: `Success! Account ID: ${req.body.accountID} of user ${req.body.passportID} is now deleted.`,
+        message: `Success! Account ID: ${req.body.accountID} of user ${req.body.passportID} is now deleted. cash returned from account is: ${cash}`,
       });
     }
   } catch (err) {

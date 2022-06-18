@@ -104,15 +104,39 @@ export const updateUsers = (account, key, cash = 0, credit = 0) => {
   saveUsers(users, key);
 };
 
-// export const deleteUser = (id) => {
-//   const users = loadUsers();
-//   const newUsers = users.filter((user) => {
-//     return user.id !== id;
-//   });
-//   if (users.length > newUsers.length) {
-//     saveUsers(newUsers);
-//     console.log(chalk.green.inverse(`user ID: ${id} was successfully deleted`));
-//   } else {
-//     console.log(chalk.red.inverse(`user ID: ${id} was not found`));
-//   }
-// };
+export const deleteUser = (passportID, key) => {
+  try {
+    const users = loadUsers()[key];
+    const userObj = users.find((user) => {
+      return user.passportID === passportID;
+    });
+    if (!userObj) {
+      throw new Error(`User ID: ${passportID} does not exist!`);
+    } else {
+      if (userObj.accounts.length > 0) {
+        throw new Error(
+          `Failure! User has still open ${userObj.accounts.length} accounts! close all accounts before deleting!`
+        );
+      }
+
+      const accounts = loadAccounts()[key];
+      userObj.accountsAccess.forEach((accID) => {
+        const account = accounts.find((acc) => {
+          return acc.accountID === accID;
+        });
+        account.usersAccess = account.usersAccess.filter((userID) => {
+          return userID !== passportID;
+        });
+      });
+
+      const newUsers = users.filter((user) => {
+        return user.passportID !== passportID;
+      });
+
+      saveUsers(newUsers, key);
+      saveAccounts(accounts, key);
+    }
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};

@@ -5,15 +5,15 @@
       "accountID": "f84l4ivy3f3",
       "cash": 12000,
       "credit": 6000,
-      "usersAccess": ["775223553", "77522"],
+      "usersAccess": ["775223553"],
       "isActive": true
     },
     {
-      "owner": "77522",
-      "accountID": "90sl4iw0fy5",
-      "cash": 11000,
-      "credit": 21000,
-      "usersAccess": ["77522"],
+      "owner": "775223553",
+      "accountID": "f4gl4ivyp8e",
+      "cash": 3000,
+      "credit": 4000,
+      "usersAccess": ["775223553"],
       "isActive": true
     }
   ],

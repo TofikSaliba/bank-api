@@ -1,19 +1,11 @@
 {
   "ud0e39lcl4iti8439lcl4iti842": [
     {
-      "name": "rani",
-      "passportID": "77522",
-      "cash": 11000,
-      "credit": 21000,
-      "accounts": ["90sl4iw0fy5"],
-      "accountsAccess": ["f84l4ivy3f3"]
-    },
-    {
       "name": "tofik",
       "passportID": "775223553",
-      "cash": 12000,
-      "credit": 6000,
-      "accounts": ["f84l4ivy3f3"],
+      "cash": 15000,
+      "credit": 10000,
+      "accounts": ["f84l4ivy3f3", "f4gl4ivyp8e"],
       "accountsAccess": []
     }
   ],
