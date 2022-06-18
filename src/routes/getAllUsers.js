@@ -11,7 +11,7 @@ getAllUsersRouter.use(
   })
 );
 
-getAllUsersRouter.get("/getAllUsers", function (req, res) {
+getAllUsersRouter.get("/api/getAllUsers", function (req, res) {
   try {
     if (!checkAPIKey(req.query.apiKey)) {
       res.status(404).json({ code: 404, message: "Wrong API key, Not found!" });

@@ -12,7 +12,7 @@ withdrawRouter.use(
   })
 );
 
-withdrawRouter.put("/withdraw", function (req, res) {
+withdrawRouter.put("/api/withdraw", function (req, res) {
   try {
     if (!checkAPIKey(req.query.apiKey)) {
       res.status(404).json({ code: 404, message: "Wrong API key, Not found!" });

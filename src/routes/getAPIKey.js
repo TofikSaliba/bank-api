@@ -11,7 +11,7 @@ getAPIKeyRouter.use(
   })
 );
 
-getAPIKeyRouter.get("/getAPIKey", function (req, res) {
+getAPIKeyRouter.get("/api/getAPIKey", function (req, res) {
   const key = createAPIKey();
 
   res.json({ key });

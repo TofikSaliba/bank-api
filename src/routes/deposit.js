@@ -12,7 +12,7 @@ depRouter.use(
   })
 );
 
-depRouter.put("/deposit", function (req, res) {
+depRouter.put("/api/deposit", function (req, res) {
   try {
     if (!checkAPIKey(req.query.apiKey)) {
       res.status(404).json({ code: 404, message: "Wrong API key, Not found!" });

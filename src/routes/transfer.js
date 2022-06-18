@@ -12,7 +12,7 @@ transferRouter.use(
   })
 );
 
-transferRouter.put("/transfer", function (req, res) {
+transferRouter.put("/api/transfer", function (req, res) {
   try {
     if (!checkAPIKey(req.query.apiKey)) {
       res.status(404).json({ code: 404, message: "Wrong API key, Not found!" });

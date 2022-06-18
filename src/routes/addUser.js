@@ -11,7 +11,7 @@ addRouter.use(
   })
 );
 
-addRouter.post("/addUser", function (req, res) {
+addRouter.post("/api/addUser", function (req, res) {
   try {
     if (!checkAPIKey(req.query.apiKey)) {
       res.status(404).json({ code: 404, message: "Wrong API key, Not found!" });

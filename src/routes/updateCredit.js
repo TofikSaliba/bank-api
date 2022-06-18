@@ -12,7 +12,7 @@ updateCreditRouter.use(
   })
 );
 
-updateCreditRouter.put("/updateCredit", function (req, res) {
+updateCreditRouter.put("/api/updateCredit", function (req, res) {
   try {
     if (!checkAPIKey(req.query.apiKey)) {
       res.status(404).json({ code: 404, message: "Wrong API key, Not found!" });

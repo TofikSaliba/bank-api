@@ -11,7 +11,7 @@ getUserRouter.use(
   })
 );
 
-getUserRouter.get("/getUser", function (req, res) {
+getUserRouter.get("/api/getUser", function (req, res) {
   console.log(req.params, req.query);
   try {
     if (!checkAPIKey(req.query.apiKey)) {

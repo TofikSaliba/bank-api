@@ -33,13 +33,9 @@ app.use(
   getAPIKeyRouter
 );
 
-// app.get("/", function (req, res) {
-//   res.send("<h1>Welcome to my bank API</h1>");
-// });
-
 // if (process.env.NODE_ENV === "production") {}
 
-app.get("/", (req, res) => {
+app.get("*", (req, res) => {
   res.sendFile(path.join(publicPath, "index.html"));
 });
 
