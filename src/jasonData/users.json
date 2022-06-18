@@ -1,6 +1,14 @@
 {
   "ud0e39lcl4iti8439lcl4iti842": [
     {
+      "name": "rani",
+      "passportID": "77522",
+      "cash": 0,
+      "credit": 0,
+      "accounts": [],
+      "accountsAccess": ["f84l4ivy3f3"]
+    },
+    {
       "name": "tofik",
       "passportID": "775223553",
       "cash": 15000,

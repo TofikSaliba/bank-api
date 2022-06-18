@@ -65,6 +65,10 @@ export const depositOrUpdateCredit = (accountID, amount, newCredit, key) => {
     });
     if (!account) {
       throw new Error(`Account ID: ${accountID} does not exist!`);
+    } else if (!account.isActive) {
+      throw new Error(
+        "Unauthorized, Account is not active! cannot do anything!"
+      );
     } else {
       let creditDiff = 0;
       account.cash += amount;
@@ -92,6 +96,10 @@ export const withdraw = (passportID, accountID, amount, key) => {
       throw new Error(
         "Unauthorized withdrawal, User ID has no access to this account!"
       );
+    } else if (!account.isActive) {
+      throw new Error(
+        "Unauthorized, Account is not active! cannot do anything!"
+      );
     } else if (account.credit + account.cash < amount) {
       throw new Error("Insufficient funds! amount not available.");
     } else {
@@ -115,6 +123,10 @@ export const addAccessToAccount = (ownerID, accessID, accountID, key) => {
     } else if (account.owner !== ownerID) {
       throw new Error(
         "Unauthorized, Only owner of the account can grant access to other users to it!"
+      );
+    } else if (!account.isActive) {
+      throw new Error(
+        "Unauthorized, Account is not active! cannot do anything!"
       );
     } else if (account.usersAccess.includes(accessID)) {
       throw new Error(
@@ -149,6 +161,10 @@ export const removeAccessToAccount = (ownerID, accessID, accountID, key) => {
     } else if (account.owner !== ownerID) {
       throw new Error(
         "Unauthorized, Only owner of the account can remove access of other users to it!"
+      );
+    } else if (!account.isActive) {
+      throw new Error(
+        "Unauthorized, Account is not active! cannot do anything!"
       );
     } else if (!account.usersAccess.includes(accessID)) {
       throw new Error(
@@ -186,6 +202,10 @@ export const deleteAccount = (passportID, accountID, key) => {
       throw new Error(`Account ID: ${accountID} does not exist!`);
     } else if (account.owner !== passportID) {
       throw new Error("Unauthorized, Only owner of the account can delete it!");
+    } else if (!account.isActive) {
+      throw new Error(
+        "Unauthorized, Account is not active! cannot do anything!"
+      );
     } else {
       if (account.cash < 0) {
         throw new Error(
@@ -214,6 +234,27 @@ export const deleteAccount = (passportID, accountID, key) => {
       saveUsers(users, key);
       saveAccounts(newAccounts, key);
       return account.cash;
+    }
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
+
+export const setAccActivity = (passportID, accountID, isActive, key) => {
+  try {
+    const accounts = loadAccounts()[key];
+    const account = accounts.find((account) => {
+      return account.accountID === accountID;
+    });
+    if (!account) {
+      throw new Error(`Account ID: ${accountID} does not exist!`);
+    } else if (account.owner !== passportID) {
+      throw new Error(
+        "Unauthorized, Only owner of the account can change activity!"
+      );
+    } else {
+      account.isActive = isActive;
+      saveAccounts(accounts, key);
     }
   } catch (err) {
     throw new Error(err.message);
