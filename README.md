@@ -11,11 +11,12 @@
 <br />
 <br />
 <br />
-<br />
 
 # The following are the end points, and how to use them!
 
 ### note: most of the data must be sent in the request body and the param names must be exact!
+
+<br />
 
 ## To start you must add users, to add users end point: /addUser
 
@@ -24,6 +25,7 @@
 ### example:
 
 fetch("https://tofik-bank-api.herokuapp.com/api/addUser?apiKey={your-key}", {
+<br />
 method: "POST",
 headers: {
 "Content-Type": "application/json",
@@ -33,6 +35,9 @@ name: "name",
 passportID: "pass ID",
 },
 });
+
+<br />
+<br />
 
 ## To add accounts to users use end point: /addAccount
 
