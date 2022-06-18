@@ -7,6 +7,7 @@ export const createAPIKey = () => {
   const newKey = uniqid("", uniqid.process());
   saveUsers([], newKey);
   saveAccounts([], newKey);
+  return newKey;
 };
 
 export const checkAPIKey = (key) => {

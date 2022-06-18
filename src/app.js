@@ -1,4 +1,3 @@
-import axios from "axios";
 import express from "express";
 import cors from "cors";
 import path from "path";
@@ -11,14 +10,14 @@ import transferRouter from "./routes/transfer.js";
 import getUserRouter from "./routes/getUser.js";
 import getAllUsersRouter from "./routes/getAllUsers.js";
 import addAccountRouter from "./routes/addAccount.js";
-
-import { createUser } from "./users-exports.js";
+import getAPIKeyRouter from "./routes/getAPIKey.js";
 
 const app = express();
 
-// const __dirname = path.dirname(fileURLToPath(import.meta.url));
-// const publicPath = path.join(__dirname, "../client/build");
-// app.use(express.static(publicPath));
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const publicPath = path.join(__dirname, "../client/build");
+
+app.use(express.static(publicPath));
 
 app.use(express.json());
 app.use(cors());
@@ -30,18 +29,19 @@ app.use(
   transferRouter,
   getUserRouter,
   getAllUsersRouter,
-  addAccountRouter
+  addAccountRouter,
+  getAPIKeyRouter
 );
 
-app.get("/", function (req, res) {
-  res.send("<h1>Welcome to my bank API</h1>");
-});
+// app.get("/", function (req, res) {
+//   res.send("<h1>Welcome to my bank API</h1>");
+// });
 
 // if (process.env.NODE_ENV === "production") {}
 
-// app.get("*", (req, res) => {
-//   res.sendFile(path.join(publicPath, "index.html"));
-// });
+app.get("/", (req, res) => {
+  res.sendFile(path.join(publicPath, "index.html"));
+});
 
 const PORT = process.env.PORT || 5000;
 
