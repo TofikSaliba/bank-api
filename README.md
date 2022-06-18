@@ -26,15 +26,15 @@
 
 fetch("https://tofik-bank-api.herokuapp.com/api/addUser?apiKey={your-key}", {
 <br />
-method: "POST",
-headers: {
-"Content-Type": "application/json",
-},
-body: {
-name: "name",
-passportID: "pass ID",
-},
-});
+method: "POST",<br />
+headers: {<br />
+"Content-Type": "application/json",<br />
+},<br />
+body: {<br />
+name: "name",<br />
+passportID: "pass ID",<br />
+},<br />
+});<br />
 
 <br />
 <br />
