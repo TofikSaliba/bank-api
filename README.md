@@ -8,6 +8,9 @@
 
 ### usage example: https://tofik-bank-api.herokuapp.com/api/{End-Point}?apiKey={your-key}
 
+
+
+
 # The following are the end points, and how to use them!
 
 ### note: most of the data must be sent in the request body and the param names must be exact!
