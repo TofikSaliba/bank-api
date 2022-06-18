@@ -21,6 +21,11 @@ export const checkAPIKey = (key) => {
   return true;
 };
 
+export const resetKey = (key) => {
+  saveUsers([], key);
+  saveAccounts([], key);
+};
+
 export const loadUsers = () => {
   try {
     const buffer = fs.readFileSync("src/jasonData/users.json");
@@ -87,16 +92,14 @@ export const getUser = (id, key) => {
 
 export const updateUsers = (account, key, cash = 0, credit = 0) => {
   const users = loadUsers()[key];
-  account.usersAccess.forEach((userID) => {
-    const userObj = users.find((user) => {
-      return user.passportID === userID;
-    });
-    userObj.cash += cash;
-    userObj.credit += credit;
-    if (!userObj.accounts.includes(account.accountID)) {
-      userObj.accounts.push(account.accountID);
-    }
+  const userObj = users.find((user) => {
+    return user.passportID === account.owner;
   });
+  userObj.cash += cash;
+  userObj.credit += credit;
+  if (!userObj.accounts.includes(account.accountID)) {
+    userObj.accounts.push(account.accountID);
+  }
   saveUsers(users, key);
 };
 

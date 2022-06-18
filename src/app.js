@@ -11,6 +11,8 @@ import getUserRouter from "./routes/getUser.js";
 import getAllUsersRouter from "./routes/getAllUsers.js";
 import addAccountRouter from "./routes/addAccount.js";
 import getAPIKeyRouter from "./routes/getAPIKey.js";
+import resetKeyRouter from "./routes/resetKey.js";
+import addAcessToAccountRouter from "./routes/grantAccess.js";
 
 const app = express();
 
@@ -30,7 +32,9 @@ app.use(
   getUserRouter,
   getAllUsersRouter,
   addAccountRouter,
-  getAPIKeyRouter
+  getAPIKeyRouter,
+  resetKeyRouter,
+  addAcessToAccountRouter
 );
 
 // if (process.env.NODE_ENV === "production") {}

@@ -103,3 +103,28 @@ export const withdraw = (passportID, accountID, amount, key) => {
     throw new Error(err.message);
   }
 };
+
+export const addAcessToAccount = (ownerID, accessID, accountID, key) => {
+  try {
+    const accounts = loadAccounts()[key];
+    const account = accounts.find((account) => {
+      return account.accountID === accountID;
+    });
+    if (!account) {
+      throw new Error(`Account ID: ${accountID} does not exist!`);
+    } else if (account.owner !== ownerID) {
+      throw new Error(
+        "Unauthorized, Only owner of the account can grant access to other users to it!"
+      );
+    } else if (account.usersAccess.includes(accessID)) {
+      throw new Error(
+        `Passport ID: ${accessID} already has access to the account ${accountID}`
+      );
+    } else {
+      account.usersAccess.push(accessID);
+      saveAccounts(accounts, key);
+    }
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
