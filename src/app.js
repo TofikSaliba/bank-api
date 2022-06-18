@@ -8,7 +8,7 @@ import updateCreditRouter from "./routes/updateCredit.js";
 import withdrawRouter from "./routes/withdraw.js";
 import transferRouter from "./routes/transfer.js";
 import getUserRouter from "./routes/getUser.js";
-import getAllUsersRouter from "./routes/getAllUsers.js";
+import filterUsersRouter from "./routes/filterUsers.js";
 import addAccountRouter from "./routes/addAccount.js";
 import getAPIKeyRouter from "./routes/getAPIKey.js";
 import resetKeyRouter from "./routes/resetKey.js";
@@ -34,7 +34,7 @@ app.use(
   withdrawRouter,
   transferRouter,
   getUserRouter,
-  getAllUsersRouter,
+  filterUsersRouter,
   addAccountRouter,
   getAPIKeyRouter,
   resetKeyRouter,

@@ -1,7 +1,7 @@
 import express from "express";
 
 import { deleteAccount } from "../accounts-exports.js";
-import { checkAPIKey } from "../users-exports.js";
+import { checkAPIKey } from "../api-exports.js";
 
 const deleteAccountRouter = express.Router();
 

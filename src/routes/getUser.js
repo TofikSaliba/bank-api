@@ -1,6 +1,7 @@
 import express from "express";
 
-import { getUser, checkAPIKey } from "../users-exports.js";
+import { getUser } from "../users-exports.js";
+import { checkAPIKey } from "../api-exports.js";
 
 const getUserRouter = express.Router();
 

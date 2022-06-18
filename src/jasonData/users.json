@@ -3,17 +3,25 @@
     {
       "name": "rani",
       "passportID": "77522",
-      "cash": 0,
-      "credit": 0,
-      "accounts": [],
+      "cash": 16000,
+      "credit": 21000,
+      "accounts": ["90sl4iw0fy5"],
       "accountsAccess": ["f84l4ivy3f3"]
     },
     {
       "name": "tofik",
       "passportID": "775223553",
-      "cash": 15000,
+      "cash": 54000,
       "credit": 10000,
       "accounts": ["f84l4ivy3f3", "f4gl4ivyp8e"],
+      "accountsAccess": []
+    },
+    {
+      "name": "rafael",
+      "passportID": "235532155",
+      "cash": 99000,
+      "credit": 2000,
+      "accounts": ["6xgl4k5ekd6"],
       "accountsAccess": []
     }
   ],

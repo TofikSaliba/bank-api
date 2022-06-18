@@ -7,7 +7,7 @@ function App() {
   const [key, setKey] = useState("");
 
   const getKey = async () => {
-    const { data } = await API.get("/getAPIKey");
+    const { data } = await API.post("/getAPIKey");
     console.log(data);
     setKey(data.key);
   };

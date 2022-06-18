@@ -1,6 +1,7 @@
 import express from "express";
 
-import { checkAPIKey, deleteUser } from "../users-exports.js";
+import { deleteUser } from "../users-exports.js";
+import { checkAPIKey } from "../api-exports.js";
 
 const deleteUserRouter = express.Router();
 

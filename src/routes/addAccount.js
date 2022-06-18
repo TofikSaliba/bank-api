@@ -1,7 +1,7 @@
 import express from "express";
 
 import { createAccount } from "../accounts-exports.js";
-import { checkAPIKey } from "../users-exports.js";
+import { checkAPIKey } from "../api-exports.js";
 
 const addAccountRouter = express.Router();
 

@@ -1,30 +1,6 @@
 import fs from "fs";
 import chalk from "chalk";
-import uniqid from "uniqid";
 import { loadAccounts, saveAccounts } from "./accounts-exports.js";
-
-export const createAPIKey = () => {
-  const newKey = uniqid("", uniqid.process());
-  saveUsers([], newKey);
-  saveAccounts([], newKey);
-  return newKey;
-};
-
-export const checkAPIKey = (key) => {
-  if (!key) {
-    throw new Error("Must provide API key in query!");
-  }
-  const usersData = loadUsers();
-  if (usersData[key] === undefined) {
-    return false;
-  }
-  return true;
-};
-
-export const resetKey = (key) => {
-  saveUsers([], key);
-  saveAccounts([], key);
-};
 
 export const loadUsers = () => {
   try {

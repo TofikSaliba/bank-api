@@ -1,7 +1,7 @@
 import express from "express";
 
 import { withdraw, depositOrUpdateCredit } from "../accounts-exports.js";
-import { checkAPIKey } from "../users-exports.js";
+import { checkAPIKey } from "../api-exports.js";
 
 const transferRouter = express.Router();
 

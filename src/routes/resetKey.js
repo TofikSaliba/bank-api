@@ -1,6 +1,5 @@
 import express from "express";
-
-import { resetKey, checkAPIKey } from "../users-exports.js";
+import { checkAPIKey, resetKey } from "../api-exports.js";
 
 const resetKeyRouter = express.Router();
 
