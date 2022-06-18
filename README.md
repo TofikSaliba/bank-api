@@ -19,7 +19,7 @@
 ### example:
 
 fetch("https://tofik-bank-api.herokuapp.com/api/addUser?apiKey={your-key}", {
-method: "GET",
+method: "POST",
 headers: {
 "Content-Type": "application/json",
 },
@@ -35,13 +35,14 @@ passportID: "pass ID",
 
 ### example:
 
-fetch("https://tofik-bank-api.herokuapp.com/api/addUser?apiKey={your-key}", {
-method: "GET",
+fetch("https://tofik-bank-api.herokuapp.com/api/addAccount?apiKey={your-key}", {
+method: "POST",
 headers: {
 "Content-Type": "application/json",
 },
 body: {
-name: "name",
 passportID: "pass ID",
+cash: "cash",
+credit: "credit",
 },
 });
