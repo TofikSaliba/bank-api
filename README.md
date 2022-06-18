@@ -7,10 +7,12 @@
 ### Use the api key as a query and the key should be: apiKey
 
 ### usage example: https://tofik-bank-api.herokuapp.com/api/{End-Point}?apiKey={your-key}
+
 <br />
 <br />
 <br />
 <br />
+
 # The following are the end points, and how to use them!
 
 ### note: most of the data must be sent in the request body and the param names must be exact!
