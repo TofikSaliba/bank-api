@@ -16,3 +16,14 @@ button {
   cursor: pointer;
   padding: 0.5rem 1rem;
 }
+
+form input {
+  padding: 0.5rem 1rem;
+  margin-right: 1rem;
+}
+
+form input,
+button {
+  border-radius: 5px;
+  border: 1px solid #111;
+}

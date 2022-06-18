@@ -14,6 +14,7 @@ getAPIKeyRouter.use(
 
 getAPIKeyRouter.post("/api/getAPIKey", async function (req, res) {
   try {
+    console.log(req.body.email);
     const key = uniqid("", uniqid.process());
     if (!req.body.email) {
       throw new Error("Error! missing params.. must provide email!");
