@@ -1,13 +1,10 @@
-import uniqid from "uniqid";
 import nodemailer from "nodemailer";
 import { saveAccounts } from "./accounts-exports.js";
 import { loadUsers, saveUsers } from "./users-exports.js";
 
-export const createAPIKey = () => {
-  const newKey = uniqid("", uniqid.process());
+export const createAPIKey = (newKey) => {
   saveUsers([], newKey);
   saveAccounts([], newKey);
-  return newKey;
 };
 
 export const checkAPIKey = (key) => {
