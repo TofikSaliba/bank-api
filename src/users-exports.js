@@ -66,6 +66,7 @@ const makeUserObj = (body, users, key) => {
     cash: 0,
     credit: 0,
     accounts: [],
+    accountsAccess: [],
   };
   users.push(newUserObj);
   saveUsers(users, key);

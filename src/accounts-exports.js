@@ -104,7 +104,7 @@ export const withdraw = (passportID, accountID, amount, key) => {
   }
 };
 
-export const addAcessToAccount = (ownerID, accessID, accountID, key) => {
+export const addAccessToAccount = (ownerID, accessID, accountID, key) => {
   try {
     const accounts = loadAccounts()[key];
     const account = accounts.find((account) => {
@@ -121,8 +121,98 @@ export const addAcessToAccount = (ownerID, accessID, accountID, key) => {
         `Passport ID: ${accessID} already has access to the account ${accountID}`
       );
     } else {
+      const users = loadUsers()[key];
+      const user = users.find((user) => {
+        return user.passportID === accessID;
+      });
+      if (!user) {
+        throw new Error(`Passport ID: ${accessID} does not exist!`);
+      }
+      user.accountsAccess.push(accountID);
+      saveUsers(users, key);
       account.usersAccess.push(accessID);
       saveAccounts(accounts, key);
+    }
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
+
+export const removeAccessToAccount = (ownerID, accessID, accountID, key) => {
+  try {
+    const accounts = loadAccounts()[key];
+    const account = accounts.find((account) => {
+      return account.accountID === accountID;
+    });
+    if (!account) {
+      throw new Error(`Account ID: ${accountID} does not exist!`);
+    } else if (account.owner !== ownerID) {
+      throw new Error(
+        "Unauthorized, Only owner of the account can remove access of other users to it!"
+      );
+    } else if (!account.usersAccess.includes(accessID)) {
+      throw new Error(
+        `Passport ID: ${accessID} already has no access to the account ${accountID}`
+      );
+    } else {
+      const users = loadUsers()[key];
+      const user = users.find((user) => {
+        return user.passportID === accessID;
+      });
+      if (!user) {
+        throw new Error(`Passport ID: ${accessID} does not exist!`);
+      }
+      user.accountsAccess = user.accountsAccess.filter((accID) => {
+        return accID !== accountID;
+      });
+      saveUsers(users, key);
+      account.usersAccess = account.usersAccess.filter((userID) => {
+        return userID !== accessID;
+      });
+      saveAccounts(accounts, key);
+    }
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
+
+export const deleteAccount = (passportID, accountID, key) => {
+  try {
+    const accounts = loadAccounts()[key];
+    const account = accounts.find((account) => {
+      return account.accountID === accountID;
+    });
+    if (!account) {
+      throw new Error(`Account ID: ${accountID} does not exist!`);
+    } else if (account.owner !== passportID) {
+      throw new Error("Unauthorized, Only owner of the account can delete it!");
+    } else {
+      if (account.cash < 0) {
+        throw new Error(
+          `Cannot delete! first pay account dept of ${account.cash}`
+        );
+      }
+      const users = loadUsers()[key];
+      account.usersAccess.forEach((userID) => {
+        const user = users.find((user) => {
+          return user.passportID === userID;
+        });
+        user.accountsAccess = user.accountsAccess.filter((accID) => {
+          return accID !== accountID;
+        });
+        if (user.passportID === account.owner) {
+          user.accounts = user.accounts.filter((accID) => {
+            return accID !== accountID;
+          });
+          user.credit -= account.credit;
+          user.cash -= account.cash;
+        }
+      });
+      const newAccounts = accounts.filter((acc) => {
+        return acc.accountID !== accountID;
+      });
+      saveUsers(users, key);
+      saveAccounts(newAccounts, key);
     }
   } catch (err) {
     throw new Error(err.message);

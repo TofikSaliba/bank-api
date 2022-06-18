@@ -11,7 +11,7 @@ resetKeyRouter.use(
   })
 );
 
-resetKeyRouter.put("/api/resetKey", function (req, res) {
+resetKeyRouter.delete("/api/resetKey", function (req, res) {
   try {
     if (!checkAPIKey(req.query.apiKey)) {
       res.status(404).json({ code: 404, message: "Wrong API key, Not found!" });

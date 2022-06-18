@@ -5,14 +5,16 @@
       "passportID": "77522",
       "cash": 11000,
       "credit": 21000,
-      "accounts": ["90sl4iw0fy5"]
+      "accounts": ["90sl4iw0fy5"],
+      "accountsAccess": ["f84l4ivy3f3"]
     },
     {
       "name": "tofik",
       "passportID": "775223553",
-      "cash": 15000,
-      "credit": 10000,
-      "accounts": ["f84l4ivy3f3", "f4gl4ivyp8e"]
+      "cash": 12000,
+      "credit": 6000,
+      "accounts": ["f84l4ivy3f3"],
+      "accountsAccess": []
     }
   ],
   "ud0e3628l4iup0cc628l4iup0cb": [],
