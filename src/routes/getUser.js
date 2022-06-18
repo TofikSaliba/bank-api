@@ -13,13 +13,12 @@ getUserRouter.use(
 );
 
 getUserRouter.get("/api/getUser", function (req, res) {
-  console.log(req.params, req.query);
   try {
     if (!checkAPIKey(req.query.apiKey)) {
       res.status(404).json({ code: 404, message: "Wrong API key, Not found!" });
     } else {
       try {
-        res.json(getUser(req.headers["passport-id"], req.query.apiKey));
+        res.json(getUser(req.query.userID, req.query.apiKey));
       } catch (err) {
         res.status(404).json({ code: 404, message: err.message });
       }
