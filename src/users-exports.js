@@ -21,7 +21,7 @@ export const saveUsers = (users, key) => {
 
 export const createUser = (body, key) => {
   if (!body.name || !body.passportID) {
-    throw new Error("must provide at least the name and passport ID!");
+    throw new Error("must provide the name and passport ID!");
   }
   const users = loadUsers()[key];
   const dublicate = users.find((user) => {
