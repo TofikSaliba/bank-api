@@ -17,6 +17,7 @@ import removeAccessToAccountRouter from "./routes/removeAccess.js";
 import deleteAccountRouter from "./routes/deleteAccount.js";
 import deleteUserRouter from "./routes/deleteUser.js";
 import setAccActivityRouter from "./routes/setAccActivity.js";
+import getAllDataRouter from "./routes/getAllData.js";
 
 const app = express();
 
@@ -42,7 +43,8 @@ app.use(
   removeAccessToAccountRouter,
   deleteAccountRouter,
   deleteUserRouter,
-  setAccActivityRouter
+  setAccActivityRouter,
+  getAllDataRouter
 );
 
 // if (process.env.NODE_ENV === "production") {}
